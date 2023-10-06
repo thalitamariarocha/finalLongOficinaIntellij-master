@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 
+import javax.swing.*;
+
 /**
  * @author Thalita
  */
@@ -122,9 +124,17 @@ public class LoginTela extends javax.swing.JFrame {
     private void btnlogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogarActionPerformed
         LoginServico loginServico = new LoginServico();
         loginServico.login(txtlogin.getText(), txtsenha.getText());
+        Long validador = loginServico.login(txtlogin.getText(), txtsenha.getText());
+        if( validador == 0){
+            JOptionPane.showMessageDialog(null, "Login/senha incorreto!");
+            return;
+        }
+        else if(validador != 0){
         home tela = new home();
         tela.show();
         this.dispose();
+        }
+
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnlogarActionPerformed

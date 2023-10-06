@@ -5,6 +5,7 @@
 package com.example.ongOficinaIntellij.funcionario.visao;
 
 import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
+import com.example.ongOficinaIntellij.home.visao.home;
 import com.example.ongOficinaIntellij.login.servico.LoginServico;
 import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,7 +146,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         jLabel8.setText("Tipo");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Cadastrar Voluntário");
+        jLabel9.setText("Voluntário");
 
         jLabel10.setText("ONG");
 
@@ -190,10 +191,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                                             .addComponent(RadioVoluntario)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(RadioAdministrador))
-                                        .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addGap(9, 9, 9)))))
+                                        .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -208,6 +206,10 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                                 .addComponent(txtsenha)
                                 .addComponent(txtOngId, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +264,13 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        LoginServico loginServico = new LoginServico();
-        loginServico.login(txtemail.getText(), txtsenha.getText());
+        //        LoginServico loginServico = new LoginServico();
+        //        loginServico.login(txtemail.getText(), txtsenha.getText());
+
+        this.dispose();
+        home tela = new home();
+        tela.show();
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
 

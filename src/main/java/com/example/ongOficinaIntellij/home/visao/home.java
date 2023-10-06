@@ -5,7 +5,7 @@
 package com.example.ongOficinaIntellij.home.visao;
 
 import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
-import com.example.ongOficinaIntellij.funcionario.visao.ListarVoluntarios;
+import com.example.ongOficinaIntellij.funcionario.visao.ListarVoluntario;
 
 /**
  *
@@ -47,6 +47,11 @@ public class home extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Untitled.png"))); // NOI18N
 
         jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setAutoscrolls(true);
 
@@ -163,12 +168,17 @@ public class home extends javax.swing.JFrame {
 
     private void jMenuListaVoluntarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaVoluntarioActionPerformed
 //bbbbbbbbbbbbbbbbbbbbbbbbbb
-        ListarVoluntarios tela = new ListarVoluntarios();
+        ListarVoluntario tela = new ListarVoluntario();
         tela.show();
         this.dispose();
 
 
     }//GEN-LAST:event_jMenuListaVoluntarioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

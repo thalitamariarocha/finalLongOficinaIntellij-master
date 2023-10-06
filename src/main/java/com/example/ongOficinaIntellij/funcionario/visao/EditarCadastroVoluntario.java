@@ -252,8 +252,11 @@ public class EditarCadastroVoluntario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        LoginServico loginServico = new LoginServico();
-        loginServico.login(txtemail.getText(), txtsenha.getText());
+//        LoginServico loginServico = new LoginServico();
+//        loginServico.login(txtemail.getText(), txtsenha.getText());
+        this.dispose();
+        ListarVoluntario tela = new ListarVoluntario();
+        tela.show();
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
 

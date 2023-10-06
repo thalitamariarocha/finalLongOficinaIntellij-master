@@ -9,6 +9,7 @@ import org.hibernate.type.StandardBasicTypes;
 import com.example.ongOficinaIntellij.home.visao.home;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -31,12 +32,13 @@ public class LoginServico {
 
         if(resultados != null && !resultados.isEmpty()){
             loginId = resultados.get(0).getId();
-
         }
 
-        UtilitariosBanco.commit();
+    //    UtilitariosBanco.commit();
         return loginId;
+
     }
+
 
 
 }
