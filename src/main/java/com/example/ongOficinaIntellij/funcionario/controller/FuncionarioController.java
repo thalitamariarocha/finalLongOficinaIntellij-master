@@ -14,6 +14,14 @@ public class FuncionarioController {
         servico.createOrUpdate(funcionarioModelo);
     }
 
+    public void delete(Long id){
+        servico.delete(id);
+    }
+
+    public  List<FuncionarioModelo> getByCPFOrName(String cpf, String nome){
+      return servico.getByCPFOrName(cpf, nome);
+    }
+
 
     public List<FuncionarioModelo> getList(){
         return servico.getList();

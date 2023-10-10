@@ -4,8 +4,12 @@
  */
 package com.example.ongOficinaIntellij.home.visao;
 
+import com.example.ongOficinaIntellij.Animal.visao.CadastroAnimal;
+import com.example.ongOficinaIntellij.adotante.visao.CadastroAdotante;
+import com.example.ongOficinaIntellij.adotante.visao.ListarAdotante;
 import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
 import com.example.ongOficinaIntellij.funcionario.visao.ListarVoluntario;
+import com.example.ongOficinaIntellij.ong.visao.CadastroOng;
 
 /**
  *
@@ -36,10 +40,12 @@ public class home extends javax.swing.JFrame {
         jMenuCadAnimal = new javax.swing.JMenuItem();
         jMenuCadVoluntario = new javax.swing.JMenuItem();
         jMenuCadAdotante = new javax.swing.JMenuItem();
+        jMenuCadOng = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuListaAnimais = new javax.swing.JMenuItem();
         jMenuListaAdotante = new javax.swing.JMenuItem();
         jMenuListaVoluntario = new javax.swing.JMenuItem();
+        jMenuListaOng = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,6 +87,14 @@ public class home extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuCadAdotante);
 
+        jMenuCadOng.setText("ONG");
+        jMenuCadOng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadOngActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCadOng);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultar");
@@ -108,6 +122,9 @@ public class home extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuListaVoluntario);
+
+        jMenuListaOng.setText("Relatório de ONG");
+        jMenu2.add(jMenuListaOng);
 
         jMenuBar1.add(jMenu2);
 
@@ -143,19 +160,22 @@ public class home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuCadVoluntarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadVoluntarioActionPerformed
-//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         CadastroVoluntario tela = new CadastroVoluntario(null);
         tela.show();
         this.dispose();
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuCadVoluntarioActionPerformed
 
     private void jMenuCadAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAnimalActionPerformed
-        // TODO add your handling code here:
+        CadastroAnimal tela = new CadastroAnimal();
+        tela.show();
+        this.dispose();
     }//GEN-LAST:event_jMenuCadAnimalActionPerformed
 
     private void jMenuCadAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAdotanteActionPerformed
-        // TODO add your handling code here:
+        CadastroAdotante tela = new CadastroAdotante();
+        tela.show();
+        this.dispose();
     }//GEN-LAST:event_jMenuCadAdotanteActionPerformed
 
     private void jMenuListaAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaAnimaisActionPerformed
@@ -163,11 +183,12 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuListaAnimaisActionPerformed
 
     private void jMenuListaAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaAdotanteActionPerformed
-        // TODO add your handling code here:
+        ListarAdotante tela = new ListarAdotante();
+        tela.show();
+        this.dispose();
     }//GEN-LAST:event_jMenuListaAdotanteActionPerformed
 
     private void jMenuListaVoluntarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaVoluntarioActionPerformed
-//bbbbbbbbbbbbbbbbbbbbbbbbbb
         ListarVoluntario tela = new ListarVoluntario();
         tela.show();
         this.dispose();
@@ -179,6 +200,12 @@ public class home extends javax.swing.JFrame {
 
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuCadOngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadOngActionPerformed
+        CadastroOng tela = new CadastroOng();
+        tela.show();
+        this.dispose();
+    }//GEN-LAST:event_jMenuCadOngActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,9 +252,11 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadAdotante;
     private javax.swing.JMenuItem jMenuCadAnimal;
+    private javax.swing.JMenuItem jMenuCadOng;
     private javax.swing.JMenuItem jMenuCadVoluntario;
     private javax.swing.JMenuItem jMenuListaAdotante;
     private javax.swing.JMenuItem jMenuListaAnimais;
+    private javax.swing.JMenuItem jMenuListaOng;
     private javax.swing.JMenuItem jMenuListaVoluntario;
     // End of variables declaration//GEN-END:variables
 }

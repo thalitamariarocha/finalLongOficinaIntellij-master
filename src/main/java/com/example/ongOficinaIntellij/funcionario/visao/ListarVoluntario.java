@@ -6,6 +6,7 @@ package com.example.ongOficinaIntellij.funcionario.visao;
 
 import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
 import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
+import com.example.ongOficinaIntellij.home.visao.home;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +36,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtPesqNome = new javax.swing.JTextField();
@@ -56,7 +57,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id_funcionario", "Nome", "CPF", "Telefone", "Endereço", "Email", "Login", "Tipo"
+                "ID", "Nome", "CPF", "Telefone", "Endereço", "Email", "Login", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -69,7 +70,12 @@ public class ListarVoluntario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Pesquisar");
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nome");
 
@@ -134,7 +140,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtPesqNome1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86)
-                        .addComponent(jButton1))
+                        .addComponent(btnPesquisar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -163,7 +169,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                     .addComponent(txtPesqNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtPesqNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
@@ -187,12 +193,39 @@ public class ListarVoluntario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPesqNome1ActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        // TODO add your handling code here:
+        home tela = new home();
+        tela.show();
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // LEANDRO, QUANDO FOR CONFIGURAR OO APAGAR, TEM QUE TER UMA MSG DE 
-        //ALERTA PERGUNTANDO SE DESEJA APAGAR MESMO O REGISTRO
+        int selectedRow = jTable1.getSelectedRow();
+
+        JButton botaoExcluir = new JButton("Excluir Registro");
+
+        //botaoExcluir.addActionListener(e -> {
+            int resposta = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem certeza de que deseja excluir este registro?",
+                    "Confirmação de Exclusão",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (resposta == JOptionPane.YES_OPTION) {
+                if (selectedRow != -1) {
+                    Long idFuncionario = (Long) jTable1.getValueAt(selectedRow, 0);
+                    FuncionarioController funcionarioController = new FuncionarioController();
+                    funcionarioController.delete(idFuncionario);
+                    preencherTabela();
+
+                // Código para excluir o registro
+                JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        //}
+            //);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -208,8 +241,14 @@ public class ListarVoluntario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+        CadastroVoluntario tela = new CadastroVoluntario(null);
+        tela.show();
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        FuncionarioController funcionarioController = new FuncionarioController();
+        this.atualizaTabela(funcionarioController.getByCPFOrName(txtPesqNome1.getText(), txtPesqNome.getText()));
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +288,26 @@ public class ListarVoluntario extends javax.swing.JFrame {
         });
     }
 
+    private void atualizaTabela(List<FuncionarioModelo> funcionarios) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Limpa a tabela
+
+        for (FuncionarioModelo funcionario : funcionarios) {
+            Object[] rowData = {
+                    funcionario.getId(),
+                    funcionario.getNome(),
+                    funcionario.getCpf(),
+                    funcionario.getTelefone(),
+                    funcionario.getEndereco(),
+                    funcionario.getEmail(),
+                    funcionario.getLogin(),
+                    funcionario.getTpUsuario()
+            };
+            model.addRow(rowData);
+        }
+    }
+
+
     private void preencherTabela() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Limpa a tabela
@@ -275,8 +334,8 @@ public class ListarVoluntario extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

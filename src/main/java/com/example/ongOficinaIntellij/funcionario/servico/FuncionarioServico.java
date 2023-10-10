@@ -41,8 +41,6 @@ public class FuncionarioServico {
         query.setParameter("tp_usuario", funcionario.getTpUsuario());
         query.setParameter("id_ong", funcionario.getIdOng());
 
-
-
         query.executeUpdate();
 
         UtilitariosBanco.commit();
@@ -99,5 +97,55 @@ public class FuncionarioServico {
         return funcionarioModelo;
     }
 
+    public void delete(Long id) {
+        UtilitariosBanco.initConection();
+        String sql = "DELETE FROM Funcionario WHERE id_funcionario = :id_funcionario";
+        Query query = UtilitariosBanco.createNativeQuery(sql);
+        if (id != null) {
+            query.setParameter("id_funcionario", id);
+            query.executeUpdate();
+            UtilitariosBanco.commit();
+            UtilitariosBanco.close();
+        }
+
+    }
+
+
+    public List<FuncionarioModelo> getByCPFOrName(String cpf, String nome ){
+        UtilitariosBanco.initConection();
+        String sql = "SELECT * FROM Funcionario ";
+        if ( !cpf.isEmpty() || !nome.isEmpty()){
+            sql += " WHERE cpf = :cpf OR nome = :nome";
+        }
+
+        Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Funcionario.class);
+
+        if ( !cpf.isEmpty() || !nome.isEmpty()) {
+            query.setParameter("cpf", cpf);
+            query.setParameter("nome", nome);
+        }
+
+        List<Funcionario> resultList = query.getResultList();
+
+        List<FuncionarioModelo> func = new ArrayList<>();
+
+        resultList.forEach( (funcionarioModelo -> {
+            FuncionarioModelo funcionario = new FuncionarioModelo();
+            funcionario.setId(funcionarioModelo.getId());
+            funcionario.setLogin(funcionarioModelo.getLogin());
+            funcionario.setEmail(funcionarioModelo.getEmail());
+            funcionario.setSenha(funcionarioModelo.getSenha());
+            funcionario.setCpf(funcionarioModelo.getCpf());
+            funcionario.setEndereco(funcionarioModelo.getEndereco());
+            funcionario.setNome(funcionarioModelo.getNome());
+            funcionario.setTelefone(funcionarioModelo.getTelefone());
+            funcionario.setTpUsuario(funcionarioModelo.getTpUsuario());
+            funcionario.setIdOng(funcionarioModelo.getIdOng());
+            func.add(funcionario);
+        }) );
+
+        UtilitariosBanco.close();
+        return func;
+    }
 
 }
