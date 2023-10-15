@@ -1,26 +1,20 @@
-package com.example.ongOficinaIntellij.funcionario.entidade;
-
+package com.example.ongOficinaIntellij.ong.entidade;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Id;
 
-import javax.persistence.*;
-
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FuncionarioModelo {
+public class OngModelo {
     @Id
     private Long id;
-    private String login;
     private String email;
-    private String senha;
-    private String cpf;
+    private String cnpj;
     private String endereco;
     private String nome;
     private String telefone;
-    private String tpUsuario;
-    private Long idOng;
 }

@@ -8,9 +8,14 @@ import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioControll
 import com.example.ongOficinaIntellij.home.visao.home;
 import com.example.ongOficinaIntellij.login.servico.LoginServico;
 import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
+import com.example.ongOficinaIntellij.ong.controller.OngController;
+import com.example.ongOficinaIntellij.ong.entidade.OngModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
+
+import javax.swing.*;
+import java.util.List;
 
 /**
  * @author Thalita
@@ -21,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 public class CadastroVoluntario extends javax.swing.JFrame {
 
     private Long idFuncionario;
+    private DefaultComboBoxModel<ChaveValor> model = new DefaultComboBoxModel<>();
 
     /**
      * Creates new form LoginTela
@@ -29,11 +35,28 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     public CadastroVoluntario(Long idFuncionario) {
         this.idFuncionario = idFuncionario;
         initComponents();
+        preencherComboBox();
         carregarDados();
+
     }
 
 
+    private void preencherComboBox() {
+        try {
 
+            OngController ongController = new OngController();
+            List<OngModelo> ongs = ongController.getList();
+
+            for (OngModelo ong : ongs) {
+                ChaveValor item = new ChaveValor(ong.getId(), ong.getNome());
+                model.addElement(item);
+            }
+
+            jComboBox1.setModel(model);
+
+        } catch (Exception e) {
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,8 +82,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         RadioAdministrador = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtOngId = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,6 +173,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
 
         jLabel10.setText("ONG");
 
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,14 +222,13 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btncadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtsenha)
-                                .addComponent(txtOngId, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txtsenha)
+                            .addComponent(jComboBox1, 0, 191, Short.MAX_VALUE))))
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -249,15 +273,15 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtOngId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btncadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -286,7 +310,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
 
         FuncionarioModelo funcionario = new FuncionarioModelo();
 
-        if(idFuncionario != null){
+        if (idFuncionario != null) {
             funcionario.setId(idFuncionario);
         }
 
@@ -298,16 +322,22 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         funcionario.setNome(txtnome.getText());
         funcionario.setTelefone(txttelefone.getText());
         funcionario.setTpUsuario(RadioVoluntario.isSelected() ? "V" : "A");
-        funcionario.setIdOng(Integer.parseInt(txtOngId.getText()));
+
+        ChaveValor item = (ChaveValor) jComboBox1.getSelectedItem();
+
+
+        funcionario.setIdOng(item.id);
 
         FuncionarioController funcionarioController = new FuncionarioController();
         funcionarioController.createOrUpdate(funcionario);
 
+        this.dispose();
+
 
     }//GEN-LAST:event_btncadastrar1ActionPerformed
 
-    public void carregarDados(){
-        if(idFuncionario != null){
+    public void carregarDados() {
+        if (idFuncionario != null) {
             FuncionarioController funcionarioController = new FuncionarioController();
             FuncionarioModelo funcionario = funcionarioController.getFuncionarioById(idFuncionario);
             txtlogin.setText(funcionario.getLogin());
@@ -319,7 +349,17 @@ public class CadastroVoluntario extends javax.swing.JFrame {
             txttelefone.setText(funcionario.getTelefone());
             RadioVoluntario.setSelected(funcionario.getTpUsuario().equals("V"));
             RadioAdministrador.setSelected(funcionario.getTpUsuario().equals("A"));
-            txtOngId.setText(String.valueOf(funcionario.getIdOng()));
+
+            for (int i = 0; i < model.getSize(); i++) {
+                ChaveValor item = model.getElementAt(i);
+                if (item.id == funcionario.getIdOng()) {
+                    jComboBox1.setSelectedItem(item);
+                    break;
+                }
+            }
+
+            //jComboBox1.setSelectedItem(funcionario.getIdOng());
+            //txtOngId.setText(String.valueOf(funcionario.getIdOng()));
         }
     }
 
@@ -390,6 +430,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioVoluntario;
     private javax.swing.JButton btncadastrar1;
     private javax.swing.JButton btncancelar;
+    private javax.swing.JComboBox<ChaveValor> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -400,7 +441,6 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField txtOngId;
     private javax.swing.JTextField txtcpf;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtendereco;
@@ -409,4 +449,20 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtsenha;
     private javax.swing.JTextField txttelefone;
     // End of variables declaration//GEN-END:variables
+    private class ChaveValor {
+        private Long id;
+        private String nomeOng;
+
+        public ChaveValor(Long id, String nomeOng) {
+            this.id = id;
+            this.nomeOng = nomeOng;
+        }
+
+        @Override
+        public String toString() {
+            return nomeOng;
+        }
+    }
 }
+
+

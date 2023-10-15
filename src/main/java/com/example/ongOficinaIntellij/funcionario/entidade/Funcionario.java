@@ -51,6 +51,6 @@ public class Funcionario {
     private String tpUsuario;
         
     @Column(name = "id_ong", nullable = true)
-    private int idOng;
+    private Long idOng;
 
 }

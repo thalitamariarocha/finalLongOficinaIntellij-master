@@ -10,6 +10,7 @@ import com.example.ongOficinaIntellij.adotante.visao.ListarAdotante;
 import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
 import com.example.ongOficinaIntellij.funcionario.visao.ListarVoluntario;
 import com.example.ongOficinaIntellij.ong.visao.CadastroOng;
+import com.example.ongOficinaIntellij.ong.visao.ListarONG;
 
 /**
  *
@@ -124,6 +125,11 @@ public class home extends javax.swing.JFrame {
         jMenu2.add(jMenuListaVoluntario);
 
         jMenuListaOng.setText("Relatório de ONG");
+        jMenuListaOng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListaOngActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuListaOng);
 
         jMenuBar1.add(jMenu2);
@@ -162,20 +168,20 @@ public class home extends javax.swing.JFrame {
     private void jMenuCadVoluntarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadVoluntarioActionPerformed
         CadastroVoluntario tela = new CadastroVoluntario(null);
         tela.show();
-        this.dispose();
+       // this.dispose();
 
     }//GEN-LAST:event_jMenuCadVoluntarioActionPerformed
 
     private void jMenuCadAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAnimalActionPerformed
         CadastroAnimal tela = new CadastroAnimal();
         tela.show();
-        this.dispose();
+       // this.dispose();
     }//GEN-LAST:event_jMenuCadAnimalActionPerformed
 
     private void jMenuCadAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAdotanteActionPerformed
         CadastroAdotante tela = new CadastroAdotante();
         tela.show();
-        this.dispose();
+       // this.dispose();
     }//GEN-LAST:event_jMenuCadAdotanteActionPerformed
 
     private void jMenuListaAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaAnimaisActionPerformed
@@ -202,10 +208,15 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuCadOngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadOngActionPerformed
-        CadastroOng tela = new CadastroOng();
+        CadastroOng tela = new CadastroOng(null);
         tela.show();
         this.dispose();
     }//GEN-LAST:event_jMenuCadOngActionPerformed
+
+    private void jMenuListaOngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaOngActionPerformed
+        ListarONG tela = new ListarONG();
+        tela.show();
+    }//GEN-LAST:event_jMenuListaOngActionPerformed
 
     /**
      * @param args the command line arguments
