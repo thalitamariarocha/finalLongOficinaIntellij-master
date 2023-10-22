@@ -4,7 +4,22 @@
  */
 package com.example.ongOficinaIntellij.Animal.visao;
 
+import com.example.ongOficinaIntellij.Animal.controller.AnimalController;
+import com.example.ongOficinaIntellij.Animal.entidade.AnimalModelo;
+import com.example.ongOficinaIntellij.Utils.UserCache;
+import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
+import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
+import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
 import com.example.ongOficinaIntellij.home.visao.home;
+import com.example.ongOficinaIntellij.ong.controller.OngController;
+import com.example.ongOficinaIntellij.ong.entidade.OngModelo;
+
+import javax.swing.*;
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,12 +27,50 @@ import com.example.ongOficinaIntellij.home.visao.home;
  */
 public class CadastroAnimal extends javax.swing.JFrame {
 
+
+    private Long idAnimal;
+    Long userId = UserCache.getLoggedInUserId();
+    private DefaultComboBoxModel<ChaveValor> model = new DefaultComboBoxModel<>();
+
     /**
      * Creates new form CadastroAnimal
      */
-    public CadastroAnimal() {
+    public CadastroAnimal(Long idAnimal) {
         initComponents();
+        preencherComboBox();
+        carregarDados();
     }
+
+
+
+    private char _escolha(){
+        if (JcomboStatus.getSelectedItem().toString() == "D - Disponível"){
+            return 'D';
+        }else if (JcomboStatus.getSelectedItem().toString() == "P - Pendente"){
+            return 'P';
+        }else{
+            return 'I';
+        }
+    }
+
+
+    private void preencherComboBox() {
+        try {
+
+            OngController ongController = new OngController();
+            List<OngModelo> ongs = ongController.getList();
+
+            for (OngModelo ong : ongs) {
+                ChaveValor item = new ChaveValor(ong.getId(), ong.getNome());
+                model.addElement(item);
+            }
+
+            jComboBox1.setModel(model);
+
+        } catch (Exception e) {
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +85,6 @@ public class CadastroAnimal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtendereco = new javax.swing.JTextField();
         txtnome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btncadastrar = new javax.swing.JButton();
@@ -53,6 +105,9 @@ public class CadastroAnimal extends javax.swing.JFrame {
         jTextAreaObservacao = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         JcomboStatus = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        txtendereco = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +118,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
         jLabel6.setText("Especie");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Animal");
-
-        txtendereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtenderecoActionPerformed(evt);
-            }
-        });
+        jLabel9.setText("Cadastrar Animal");
 
         txtnome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,62 +194,77 @@ public class CadastroAnimal extends javax.swing.JFrame {
 
         JcomboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "D - Disponível", "P - Pendente", "I - Indisponível" }));
 
+        jLabel11.setText("ONG");
+
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        txtendereco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtendereco.setText("use dd/mm/aaaa");
+        txtendereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtenderecoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel9))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JcomboPorte, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(204, 204, 204))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtendereco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(JcomboPorte, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtnome, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(RadioCao)
-                                            .addComponent(RadioSexoM))
-                                        .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(RadioSexoF)
-                                            .addComponent(RadioGato))
-                                        .addGap(44, 44, 44))))
+                                    .addComponent(RadioCao)
+                                    .addComponent(RadioSexoM))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RadioSexoF)
+                                    .addComponent(RadioGato))
+                                .addGap(44, 44, 44))
+                            .addComponent(jLabel9)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(JcomboCastrado, 0, 192, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel3))
+                                .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(JcomboCastrado, 0, 192, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btncadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(JcomboStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                                .addComponent(btncadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JcomboStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtendereco, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,19 +309,19 @@ public class CadastroAnimal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JcomboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btncadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtenderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtenderecoActionPerformed
 
     private void txtnomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomeActionPerformed
         // TODO add your handling code here:
@@ -265,29 +329,59 @@ public class CadastroAnimal extends javax.swing.JFrame {
 
     private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
 
-        //        FuncionarioModelo funcionario = new FuncionarioModelo();
-        //
-        //        if(idFuncionario != null){
-            //            funcionario.setId(idFuncionario);
-            //        }
-        //
-        //        funcionario.setLogin(txtlogin.getText());
-        //        funcionario.setEmail(txtemail.getText());
-        //        funcionario.setSenha(txtsenha.getText());
-        //        funcionario.setCpf(txtcpf.getText());
-        //        funcionario.setEndereco(txtendereco.getText());
-        //        funcionario.setNome(txtnome.getText());
-        //        funcionario.setTelefone(txttelefone.getText());
-        //        funcionario.setTpUsuario(RadioVoluntario.isSelected() ? "V" : "A");
-        //        funcionario.setIdOng(Integer.parseInt(txtOngId.getText()));
-        //
-        //        FuncionarioController funcionarioController = new FuncionarioController();
-        //        funcionarioController.createOrUpdate(funcionario);
+                AnimalModelo animal = new AnimalModelo();
+
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = dateFormat.parse(txtendereco.getText());
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        if(idAnimal != null){
+                    animal.setId(idAnimal);
+                    }
+                animal.setDt_nascimento(date);
+                animal.setNome(txtnome.getText());
+                animal.setSexo(RadioSexoM.isSelected() ? "M" : "F");
+                animal.setEspecie(RadioCao.isSelected() ? "C" : "G");
+                animal.setCastrado(JcomboCastrado.getSelectedItem().toString());
+                animal.setPorte(JcomboPorte.getSelectedItem().toString());
+                animal.setVacina(jTextAreaVacina.getText());
+                animal.setObservacao(jTextAreaObservacao.getText());
+
+        // Obtém o item selecionado no JComboBox
+        String statusSelecionado = (String) JcomboStatus.getSelectedItem();
+
+// Chama a função _escolha() para obter o status desejado
+        String statusEscolhido = String.valueOf(_escolha());
+
+// Define o status do animal com base na escolha do usuário
+        //animal.setStatus(statusSelecionado);
+
+// Ou, se você deseja definir o status com base na função _escolha():
+        animal.setStatus(statusEscolhido);
+                //animal.setStatus(JcomboStatus.getSelectedItem(_escolha()));
+
+
+        animal.setIdFuncionario(userId);
+
+                ChaveValor item = (ChaveValor) jComboBox1.getSelectedItem();
+
+                animal.setIdOng(item.id);
+
+
+
+                AnimalController animalController = new AnimalController();
+                animalController.createOrUpdate(animal);
+                this.dispose();
     }//GEN-LAST:event_btncadastrarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        //        LoginServico loginServico = new LoginServico();
-        //        loginServico.login(txtemail.getText(), txtsenha.getText());
+
 
         this.dispose();
         
@@ -313,6 +407,55 @@ public class CadastroAnimal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioSexoMActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void txtenderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtenderecoActionPerformed
+
+
+    public void carregarDados() {
+        if (idAnimal != null) {
+            jLabel9.setText("Editar Animal");
+            AnimalController animalController = new AnimalController();
+            AnimalModelo animal = animalController.getAnimalById(idAnimal);
+
+            txtendereco.setValue(animal.getDt_nascimento());
+            txtnome.setText(animal.getNome());
+            RadioSexoM.setSelected(animal.getSexo().equals("M"));
+            RadioSexoF.setSelected(animal.getSexo().equals("F"));
+            RadioCao.setSelected(animal.getEspecie().equals("C"));
+            RadioGato.setSelected(animal.getEspecie().equals("G"));
+            JcomboCastrado.setSelectedItem(animal.getCastrado());
+            JcomboPorte.setSelectedItem(animal.getPorte());
+            jTextAreaVacina.setText(animal.getVacina());
+            jTextAreaObservacao.setText(animal.getObservacao());
+            JcomboStatus.setSelectedItem(animal.getStatus());
+
+//            txtlogin.setText(funcionario.getLogin());
+//            txtemail.setText(funcionario.getEmail());
+//            txtsenha.setText(funcionario.getSenha());
+//            txtcpf.setText(funcionario.getCpf());
+//            txtendereco.setText(funcionario.getEndereco());
+//            txtnome.setText(funcionario.getNome());
+//            txttelefone.setText(funcionario.getTelefone());
+//            RadioVoluntario.setSelected(funcionario.getTpUsuario().equals("V"));
+//            RadioAdministrador.setSelected(funcionario.getTpUsuario().equals("A"));
+
+            for (int i = 0; i < model.getSize(); i++) {
+                ChaveValor item = model.getElementAt(i);
+                if (item.id == animal.getIdOng()) {
+                    jComboBox1.setSelectedItem(item);
+                    break;
+                }
+            }
+
+
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -322,30 +465,30 @@ public class CadastroAnimal extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CadastroAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroAnimal().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadastroAnimal(null).setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -358,8 +501,10 @@ public class CadastroAnimal extends javax.swing.JFrame {
     private javax.swing.JRadioButton RadioSexoM;
     private javax.swing.JButton btncadastrar;
     private javax.swing.JButton btncancelar;
+    private javax.swing.JComboBox<ChaveValor> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -372,7 +517,26 @@ public class CadastroAnimal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextAreaObservacao;
     private javax.swing.JTextArea jTextAreaVacina;
-    private javax.swing.JTextField txtendereco;
+    private javax.swing.JFormattedTextField txtendereco;
     private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables
+
+    private class ChaveValor {
+        private Long id;
+        private String nomeOng;
+
+        public ChaveValor(Long id, String nomeOng) {
+            this.id = id;
+            this.nomeOng = nomeOng;
+        }
+
+        @Override
+        public String toString() {
+            return nomeOng;
+        }
+
+
+
+
+    }
 }

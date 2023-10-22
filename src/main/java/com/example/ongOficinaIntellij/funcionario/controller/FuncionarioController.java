@@ -30,4 +30,6 @@ public class FuncionarioController {
     public FuncionarioModelo getFuncionarioById(Long id){
         return servico.getFuncionarioById(id);
     }
+
+
 }

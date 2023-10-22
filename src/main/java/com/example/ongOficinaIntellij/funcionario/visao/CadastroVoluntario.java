@@ -163,11 +163,16 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         jLabel8.setText("Tipo");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Cadastro de Voluntário");
+        jLabel9.setText("Voluntário");
 
         jLabel10.setText("ONG");
 
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         txtsenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,8 +293,6 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        //        LoginServico loginServico = new LoginServico();
-        //        loginServico.login(txtemail.getText(), txtsenha.getText());
 
         this.dispose();
         home tela = new home();
@@ -387,6 +390,10 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsenhaActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

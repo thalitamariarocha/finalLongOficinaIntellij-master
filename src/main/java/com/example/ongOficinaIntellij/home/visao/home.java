@@ -173,7 +173,7 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuCadVoluntarioActionPerformed
 
     private void jMenuCadAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadAnimalActionPerformed
-        CadastroAnimal tela = new CadastroAnimal();
+        CadastroAnimal tela = new CadastroAnimal(null);
         tela.show();
        // this.dispose();
     }//GEN-LAST:event_jMenuCadAnimalActionPerformed

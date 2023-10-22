@@ -1,5 +1,6 @@
 package com.example.ongOficinaIntellij.login.servico;
 
+import com.example.ongOficinaIntellij.Utils.UserCache;
 import com.example.ongOficinaIntellij.Utils.UtilitariosBanco;
 import com.example.ongOficinaIntellij.funcionario.entidade.Funcionario;
 import com.example.ongOficinaIntellij.login.entidade.Login;
@@ -34,6 +35,8 @@ public class LoginServico {
             loginId = resultados.get(0).getId();
         }
 
+        UserCache.setUserLoggedIn(loginId);
+
     //    UtilitariosBanco.commit();
         return loginId;
 
@@ -43,12 +46,3 @@ public class LoginServico {
 
 }
 
-// WARD ABAIXO.
-//        for (Login entidade : resultados) {
-//            System.out.println(entidade.getSenha());
-//        }
-
-//        resultados.forEach((entidade) -> {
-//                    System.out.println(entidade.getSenha());
-//                }
-//        );

@@ -302,11 +302,11 @@ public class ListarAdotante extends javax.swing.JFrame {
             Object[] rowData = {
                     adotante.getId(),
                     adotante.getNome(),
-                    adotante.getRenda(),
                     adotante.getCpf(),
                     adotante.getTelefone(),
                     adotante.getEndereco(),
                     adotante.getEmail(),
+                    adotante.getRenda(),
                     adotante.getTpMoradia()
             };
             model.addRow(rowData);
@@ -325,11 +325,11 @@ public class ListarAdotante extends javax.swing.JFrame {
             Object[] rowData = {
                     adotante.getId(),
                     adotante.getNome(),
-                    adotante.getRenda(),
                     adotante.getCpf(),
                     adotante.getTelefone(),
                     adotante.getEndereco(),
                     adotante.getEmail(),
+                    adotante.getRenda(),
                     adotante.getTpMoradia()
             };
             model.addRow(rowData);
