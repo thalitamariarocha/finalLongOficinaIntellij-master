@@ -151,14 +151,14 @@ public class ListarONG extends javax.swing.JFrame {
                         .addGap(247, 247, 247)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(btnVoltar)
+                        .addGap(152, 152, 152)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCadastrar)))
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,14 +191,19 @@ public class ListarONG extends javax.swing.JFrame {
         int selectedRow = jTable1.getSelectedRow();
 
         JButton botaoExcluir = new JButton("Excluir Registro");
+        int resposta = 1;
 
-        //botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(
-                null,
-                "Tem certeza de que deseja excluir este registro?",
-                "Confirmação de Exclusão",
-                JOptionPane.YES_NO_OPTION
+        if (selectedRow != -1) {
+            //botaoExcluir.addActionListener(e -> {
+            resposta = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem certeza de que deseja excluir cadastro de: " +
+                            (String) jTable1.getValueAt(selectedRow, 1)
+                            +"?",
+                    "Confirmação de Exclusão",
+                    JOptionPane.YES_NO_OPTION
             );
+        }
 
             if (resposta == JOptionPane.YES_OPTION) {
                 if (selectedRow != -1) {

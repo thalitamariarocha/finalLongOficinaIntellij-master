@@ -51,7 +51,7 @@ public class FuncionarioServico {
     public List<FuncionarioModelo> getList(){
 
         UtilitariosBanco.initConection();
-        String sql = "SELECT * FROM Funcionario";
+        String sql = "SELECT * FROM Funcionario order by nome";
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Funcionario.class);
         List<Funcionario> resultList = query.getResultList();
 

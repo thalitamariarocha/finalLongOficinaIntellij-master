@@ -4,7 +4,15 @@
  */
 package com.example.ongOficinaIntellij.adotante.visao;
 
+import com.example.ongOficinaIntellij.adotante.controller.AdotanteController;
+import com.example.ongOficinaIntellij.adotante.entidade.AdotanteModelo;
+import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
 import com.example.ongOficinaIntellij.home.visao.home;
+import com.example.ongOficinaIntellij.ong.controller.OngController;
+import com.example.ongOficinaIntellij.ong.entidade.OngModelo;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.swing.*;
 
 /**
  *
@@ -12,11 +20,18 @@ import com.example.ongOficinaIntellij.home.visao.home;
  */
 public class CadastroAdotante extends javax.swing.JFrame {
 
+    private Long idAdotante;
+    //private DefaultComboBoxModel<CadastroVoluntario.ChaveValor> model = new DefaultComboBoxModel<>();
+
     /**
-     * Creates new form CadastroAdotante
+     * Creates new form LoginTela
      */
-    public CadastroAdotante() {
+    @Autowired
+    public CadastroAdotante(Long idAdotante) {
+        this.idAdotante = idAdotante;
         initComponents();
+        carregarDados();
+
     }
 
     /**
@@ -31,7 +46,7 @@ public class CadastroAdotante extends javax.swing.JFrame {
         RadioApartamento = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        txtTitulo = new javax.swing.JLabel();
         txtendereco = new javax.swing.JTextField();
         txttelefone = new javax.swing.JTextField();
         btncancelar = new javax.swing.JButton();
@@ -60,8 +75,8 @@ public class CadastroAdotante extends javax.swing.JFrame {
 
         jLabel4.setText("Endereço");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Adotante");
+        txtTitulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        txtTitulo.setText("Cadastrar Adotante");
 
         txtendereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,18 +190,17 @@ public class CadastroAdotante extends javax.swing.JFrame {
                                 .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btncadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtrenda, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtTitulo)
+                        .addGap(15, 15, 15)))
                 .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jLabel9)
+                .addComponent(txtTitulo)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RadioCasa)
@@ -228,6 +242,9 @@ public class CadastroAdotante extends javax.swing.JFrame {
 
     private void RadioApartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioApartamentoActionPerformed
         // TODO add your handling code here:
+        RadioApartamento.setSelected(true);
+        RadioCasa.setSelected(false);
+
     }//GEN-LAST:event_RadioApartamentoActionPerformed
 
     private void txtenderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtenderecoActionPerformed
@@ -239,8 +256,7 @@ public class CadastroAdotante extends javax.swing.JFrame {
     }//GEN-LAST:event_txttelefoneActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        //        LoginServico loginServico = new LoginServico();
-        //        loginServico.login(txtemail.getText(), txtsenha.getText());
+
 
         this.dispose();
         home tela = new home();
@@ -263,24 +279,26 @@ public class CadastroAdotante extends javax.swing.JFrame {
 
     private void btncadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrarActionPerformed
 
-//        FuncionarioModelo funcionario = new FuncionarioModelo();
-//
-//        if(idFuncionario != null){
-//            funcionario.setId(idFuncionario);
-//        }
-//
-//        funcionario.setLogin(txtlogin.getText());
-//        funcionario.setEmail(txtemail.getText());
-//        funcionario.setSenha(txtsenha.getText());
-//        funcionario.setCpf(txtcpf.getText());
-//        funcionario.setEndereco(txtendereco.getText());
-//        funcionario.setNome(txtnome.getText());
-//        funcionario.setTelefone(txttelefone.getText());
-//        funcionario.setTpUsuario(RadioVoluntario.isSelected() ? "V" : "A");
-//        funcionario.setIdOng(Integer.parseInt(txtOngId.getText()));
-//
-//        FuncionarioController funcionarioController = new FuncionarioController();
-//        funcionarioController.createOrUpdate(funcionario);
+        AdotanteModelo adotante = new AdotanteModelo();
+
+        if(idAdotante != null){
+            adotante.setId(idAdotante);
+        }
+
+
+        adotante.setEmail(txtemail.getText());
+        adotante.setRenda(Float.parseFloat(txtrenda.getText()));
+        adotante.setCpf(txtcpf.getText());
+        adotante.setEndereco(txtendereco.getText());
+        adotante.setNome(txtnome.getText());
+        adotante.setTelefone(txttelefone.getText());
+        adotante.setTpMoradia(RadioCasa.isSelected() ? "C" : "A");
+
+
+        AdotanteController adotanteController = new AdotanteController();
+        adotanteController.createOrUpdate(adotante);
+
+        this.dispose();
 
     }//GEN-LAST:event_btncadastrarActionPerformed
 
@@ -290,16 +308,40 @@ public class CadastroAdotante extends javax.swing.JFrame {
 
     private void RadioCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioCasaActionPerformed
         // TODO add your handling code here:
+
+        RadioCasa.setSelected(true);
+        RadioApartamento.setSelected(false);
+
     }//GEN-LAST:event_RadioCasaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
+
+
+
+    public void carregarDados(){
+        if(idAdotante != null){
+            txtTitulo.setText("Editar Adotante");
+            AdotanteController adotanteController = new AdotanteController();
+            AdotanteModelo adotante = adotanteController.getAdotanteById(idAdotante);
+
+            txtemail.setText(adotante.getEmail());
+            txtrenda.setText(String.valueOf(adotante.getRenda()));
+            txtcpf.setText(adotante.getCpf());
+            txtendereco.setText(adotante.getEndereco());
+            txtnome.setText(adotante.getNome());
+            txttelefone.setText(adotante.getTelefone());
+            RadioCasa.setSelected(adotante.getTpMoradia().equals("C"));
+            RadioApartamento.setSelected(adotante.getTpMoradia().equals("A"));
+
+        }
+    }
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -320,11 +362,11 @@ public class CadastroAdotante extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroAdotante().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CadastroAdotante().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,7 +381,7 @@ public class CadastroAdotante extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel txtTitulo;
     private javax.swing.JTextField txtcpf;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtendereco;

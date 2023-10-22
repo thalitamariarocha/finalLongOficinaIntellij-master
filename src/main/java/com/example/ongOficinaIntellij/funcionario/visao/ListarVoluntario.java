@@ -148,13 +148,13 @@ public class ListarVoluntario extends javax.swing.JFrame {
                         .addGap(247, 247, 247)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(btnVoltar)
+                        .addGap(152, 152, 152)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCadastrar)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -203,13 +203,20 @@ public class ListarVoluntario extends javax.swing.JFrame {
 
         JButton botaoExcluir = new JButton("Excluir Registro");
 
+        int resposta = 1;
+
         //botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(
+        if (selectedRow != -1) {
+            //botaoExcluir.addActionListener(e -> {
+            resposta = JOptionPane.showConfirmDialog(
                     null,
-                    "Tem certeza de que deseja excluir este registro?",
+                    "Tem certeza de que deseja excluir cadastro de: " +
+                            (String) jTable1.getValueAt(selectedRow, 1)
+                            +"?",
                     "Confirmação de Exclusão",
                     JOptionPane.YES_NO_OPTION
             );
+        }
 
             if (resposta == JOptionPane.YES_OPTION) {
                 if (selectedRow != -1) {
@@ -222,7 +229,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um voluntário para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         //}
             //);

@@ -4,9 +4,15 @@
  */
 package com.example.ongOficinaIntellij.adotante.visao;
 
+import com.example.ongOficinaIntellij.adotante.controller.AdotanteController;
+import com.example.ongOficinaIntellij.adotante.entidade.AdotanteModelo;
+import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
+import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
 import com.example.ongOficinaIntellij.home.visao.home;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
@@ -18,7 +24,9 @@ public class ListarAdotante extends javax.swing.JFrame {
      * Creates new form ListarAdotante
      */
     public ListarAdotante() {
+
         initComponents();
+        preencherTabela();
     }
 
     /**
@@ -181,8 +189,8 @@ public class ListarAdotante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        //   FuncionarioController funcionarioController = new FuncionarioController();
-        //   this.atualizaTabela(funcionarioController.getByCPFOrName(txtPesqNome1.getText(), txtPesqNome.getText()));
+        AdotanteController adotanteController = new AdotanteController();
+           this.atualizaTabela(adotanteController.getByCPFOrName(txtPesqCpf.getText(), txtPesqNome.getText()));
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtPesqNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesqNomeActionPerformed
@@ -197,27 +205,32 @@ public class ListarAdotante extends javax.swing.JFrame {
         int selectedRow = jTable1.getSelectedRow();
 
         JButton botaoExcluir = new JButton("Excluir Registro");
+        int resposta = 1;
 
-        //botaoExcluir.addActionListener(e -> {
-            int resposta = JOptionPane.showConfirmDialog(
-                null,
-                "Tem certeza de que deseja excluir este registro?",
-                "Confirmação de Exclusão",
-                JOptionPane.YES_NO_OPTION
+        if (selectedRow != -1) {
+            //botaoExcluir.addActionListener(e -> {
+             resposta = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem certeza de que deseja excluir cadastro de: " +
+                            (String) jTable1.getValueAt(selectedRow, 1)
+                            +"?",
+                    "Confirmação de Exclusão",
+                    JOptionPane.YES_NO_OPTION
             );
+        }
 
             if (resposta == JOptionPane.YES_OPTION) {
                 if (selectedRow != -1) {
-                    //                    Long idFuncionario = (Long) jTable1.getValueAt(selectedRow, 0);
-                    //                    FuncionarioController funcionarioController = new FuncionarioController();
-                    //                    funcionarioController.delete(idFuncionario);
-                    //                    preencherTabela();
+                    Long idAdotante = (Long) jTable1.getValueAt(selectedRow, 0);
+                    AdotanteController adotanteController = new AdotanteController();
+                    adotanteController.delete(idAdotante);
+                    preencherTabela();
 
                     // Código para excluir o registro
                     JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Selecione um adotante para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
             //}
         //);
@@ -232,17 +245,17 @@ public class ListarAdotante extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
-            Long idFuncionario = (Long) jTable1.getValueAt(selectedRow, 0);
+            Long idAdotante = (Long) jTable1.getValueAt(selectedRow, 0);
 
-            //    CadastroOng tela = new CadastroOng(idOng);
-            //    tela.show();
+            CadastroAdotante tela = new CadastroAdotante(idAdotante);
+                tela.show();
         } else {
-            JOptionPane.showMessageDialog(this, "Selecione um funcionário para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um adotante para editar.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        CadastroAdotante tela = new CadastroAdotante();
+        CadastroAdotante tela = new CadastroAdotante(null);
         tela.show();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -279,6 +292,48 @@ public class ListarAdotante extends javax.swing.JFrame {
                 new ListarAdotante().setVisible(true);
             }
         });
+    }
+
+    private void atualizaTabela(List<AdotanteModelo> adotantes) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Limpa a tabela
+
+        for (AdotanteModelo adotante : adotantes) {
+            Object[] rowData = {
+                    adotante.getId(),
+                    adotante.getNome(),
+                    adotante.getRenda(),
+                    adotante.getCpf(),
+                    adotante.getTelefone(),
+                    adotante.getEndereco(),
+                    adotante.getEmail(),
+                    adotante.getTpMoradia()
+            };
+            model.addRow(rowData);
+        }
+    }
+
+
+    private void preencherTabela() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Limpa a tabela
+
+        AdotanteController adotanteController = new AdotanteController();
+        List<AdotanteModelo> adotantes = AdotanteController.getList();
+
+        for (AdotanteModelo adotante : adotantes) {
+            Object[] rowData = {
+                    adotante.getId(),
+                    adotante.getNome(),
+                    adotante.getRenda(),
+                    adotante.getCpf(),
+                    adotante.getTelefone(),
+                    adotante.getEndereco(),
+                    adotante.getEmail(),
+                    adotante.getTpMoradia()
+            };
+            model.addRow(rowData);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

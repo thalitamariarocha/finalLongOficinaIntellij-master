@@ -45,7 +45,7 @@ public class OngServico {
     public List<OngModelo> getList(){
 
         UtilitariosBanco.initConection();
-        String sql = "SELECT * FROM ong";
+        String sql = "SELECT * FROM ong order by nome";
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Ong.class);
         List<Ong> resultList = query.getResultList();
 

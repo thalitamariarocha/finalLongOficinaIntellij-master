@@ -79,7 +79,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
 
         jLabel7.setText("Nome");
 
-        btncadastrar.setText("Cadastrar");
+        btncadastrar.setText("Salvar");
         btncadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncadastrarActionPerformed(evt);

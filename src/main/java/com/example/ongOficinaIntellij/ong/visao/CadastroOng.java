@@ -52,7 +52,7 @@ public class CadastroOng extends javax.swing.JFrame {
         jLabel4.setText("Endereço");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("ONG");
+        jLabel9.setText("Cadastrar ONG");
 
         txtendereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class CadastroOng extends javax.swing.JFrame {
 
         jLabel7.setText("Nome");
 
-        btncadastrar1.setText("Cadastrar");
+        btncadastrar1.setText("Salvar");
         btncadastrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncadastrar1ActionPerformed(evt);
@@ -236,6 +236,7 @@ public class CadastroOng extends javax.swing.JFrame {
 
     public void carregarDados(){
         if(idOng != null){
+            jLabel9.setText("Editar ONG");
             OngController ongController = new OngController();
            OngModelo ong = ongController.getOngById(idOng);
 

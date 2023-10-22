@@ -85,8 +85,8 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btncadastrar1" min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtsenha" max="32767" attributes="0"/>
                           <Component id="jComboBox1" alignment="0" pref="191" max="32767" attributes="0"/>
+                          <Component id="txtsenha" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -142,8 +142,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtsenha" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtsenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -184,14 +184,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtemailActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="txtsenha">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtsenhaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btncadastrar1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncadastrar1ActionPerformed"/>
@@ -249,7 +244,7 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="RadioVoluntario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Voluntario"/>
+        <Property name="text" type="java.lang.String" value="Volunt&#xe1;rio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="RadioAdministrador">
@@ -287,6 +282,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ChaveValor&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtsenha">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtsenhaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

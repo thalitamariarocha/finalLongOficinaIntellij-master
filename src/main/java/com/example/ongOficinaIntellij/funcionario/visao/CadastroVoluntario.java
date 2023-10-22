@@ -66,7 +66,6 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtemail = new javax.swing.JTextField();
-        txtsenha = new javax.swing.JPasswordField();
         btncadastrar1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtlogin = new javax.swing.JTextField();
@@ -84,6 +83,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        txtsenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,13 +104,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
             }
         });
 
-        txtsenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsenhaActionPerformed(evt);
-            }
-        });
-
-        btncadastrar1.setText("Cadastrar");
+        btncadastrar1.setText("Salvar");
         btncadastrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncadastrar1ActionPerformed(evt);
@@ -157,7 +151,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
 
         jLabel7.setText("Nome");
 
-        RadioVoluntario.setText("Voluntario");
+        RadioVoluntario.setText("Voluntário");
 
         RadioAdministrador.setText("Administrador");
         RadioAdministrador.addActionListener(new java.awt.event.ActionListener() {
@@ -169,11 +163,17 @@ public class CadastroVoluntario extends javax.swing.JFrame {
         jLabel8.setText("Tipo");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("Voluntário");
+        jLabel9.setText("Cadastro de Voluntário");
 
         jLabel10.setText("ONG");
 
         jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        txtsenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsenhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,8 +227,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                                 .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btncadastrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtsenha)
-                            .addComponent(jComboBox1, 0, 191, Short.MAX_VALUE))))
+                            .addComponent(jComboBox1, 0, 191, Short.MAX_VALUE)
+                            .addComponent(txtsenha))))
                 .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -271,8 +271,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
                     .addComponent(txtlogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
@@ -301,10 +301,6 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemailActionPerformed
-
-    private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtsenhaActionPerformed
 
     private void btncadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncadastrar1ActionPerformed
 
@@ -338,6 +334,7 @@ public class CadastroVoluntario extends javax.swing.JFrame {
 
     public void carregarDados() {
         if (idFuncionario != null) {
+            jLabel9.setText("Editar Voluntário");
             FuncionarioController funcionarioController = new FuncionarioController();
             FuncionarioModelo funcionario = funcionarioController.getFuncionarioById(idFuncionario);
             txtlogin.setText(funcionario.getLogin());
@@ -386,6 +383,10 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private void RadioAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioAdministradorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioAdministradorActionPerformed
+
+    private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsenhaActionPerformed
 
     /**
      * @param args the command line arguments
