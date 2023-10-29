@@ -21,7 +21,7 @@ public class AnimalServico {
             sql = "INSERT INTO animal (nome, idade, sexo, especie, castrado, porte, vacina, observacao, status, id_ong, id_funcionario) " +
                     "VALUES (:nome, :dt_nascimento, :sexo, :especie, :castrado, :porte, :vacina, :observacao, :status, :id_ong, :id_funcionario)";
         } else {
-            sql = "UPDATE Funcionario SET nome = :nome, idade = :dt_nascimento, sexo = :sexo, especie = " +
+            sql = "UPDATE animal SET nome = :nome, idade = :dt_nascimento, sexo = :sexo, especie = " +
                     " :especie, castrado = :castrado, porte = :porte, vacina = :vacina," +
                     " observacao = :observacao, status = :status, id_ong = :id_ong, id_funcionario = :id_funcionario" +
                     " WHERE id_animal = :id_animal";
@@ -122,17 +122,17 @@ public class AnimalServico {
     }
 
 
-    public List<AnimalModelo> getByEspecieOrName(String especie, String nome ){
+    public List<AnimalModelo> getByStatusOrName(String status, String nome ){
         UtilitariosBanco.initConection();
         String sql = "SELECT * FROM animal";
-        if ( !especie.isEmpty() || !nome.isEmpty()){
-            sql += " WHERE especie = :especie OR nome = :nome";
+        if ( !status.isEmpty() || !nome.isEmpty()){
+            sql += " WHERE status = :status OR nome = :nome";
         }
 
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Animal.class);
 
-        if ( !especie.isEmpty() || !nome.isEmpty()) {
-            query.setParameter("especie", especie);
+        if ( !status.isEmpty() || !nome.isEmpty()) {
+            query.setParameter("status", "D");
             query.setParameter("nome", nome);
         }
 

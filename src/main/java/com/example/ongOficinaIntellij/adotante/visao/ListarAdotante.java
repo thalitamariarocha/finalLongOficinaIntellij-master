@@ -257,6 +257,7 @@ public class ListarAdotante extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         CadastroAdotante tela = new CadastroAdotante(null);
         tela.show();
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

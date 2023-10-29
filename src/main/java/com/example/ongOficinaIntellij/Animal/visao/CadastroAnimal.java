@@ -36,6 +36,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
      * Creates new form CadastroAnimal
      */
     public CadastroAnimal(Long idAnimal) {
+        this.idAnimal = idAnimal;
         initComponents();
         preencherComboBox();
         carregarDados();
@@ -434,15 +435,6 @@ public class CadastroAnimal extends javax.swing.JFrame {
             jTextAreaObservacao.setText(animal.getObservacao());
             JcomboStatus.setSelectedItem(animal.getStatus());
 
-//            txtlogin.setText(funcionario.getLogin());
-//            txtemail.setText(funcionario.getEmail());
-//            txtsenha.setText(funcionario.getSenha());
-//            txtcpf.setText(funcionario.getCpf());
-//            txtendereco.setText(funcionario.getEndereco());
-//            txtnome.setText(funcionario.getNome());
-//            txttelefone.setText(funcionario.getTelefone());
-//            RadioVoluntario.setSelected(funcionario.getTpUsuario().equals("V"));
-//            RadioAdministrador.setSelected(funcionario.getTpUsuario().equals("A"));
 
             for (int i = 0; i < model.getSize(); i++) {
                 ChaveValor item = model.getElementAt(i);

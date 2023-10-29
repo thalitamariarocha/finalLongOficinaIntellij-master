@@ -5,12 +5,19 @@
 package com.example.ongOficinaIntellij.home.visao;
 
 import com.example.ongOficinaIntellij.Animal.visao.CadastroAnimal;
+import com.example.ongOficinaIntellij.Animal.visao.ListarAnimal;
+import com.example.ongOficinaIntellij.Utils.UserCache;
+import com.example.ongOficinaIntellij.adocao.visao.AprovaAdocao;
 import com.example.ongOficinaIntellij.adotante.visao.CadastroAdotante;
 import com.example.ongOficinaIntellij.adotante.visao.ListarAdotante;
+import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
+import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
 import com.example.ongOficinaIntellij.funcionario.visao.CadastroVoluntario;
 import com.example.ongOficinaIntellij.funcionario.visao.ListarVoluntario;
 import com.example.ongOficinaIntellij.ong.visao.CadastroOng;
 import com.example.ongOficinaIntellij.ong.visao.ListarONG;
+
+import javax.swing.*;
 
 /**
  *
@@ -47,7 +54,8 @@ public class home extends javax.swing.JFrame {
         jMenuListaAdotante = new javax.swing.JMenuItem();
         jMenuListaVoluntario = new javax.swing.JMenuItem();
         jMenuListaOng = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jMenuaprovar = new javax.swing.JMenu();
+        jMenuAprovarAdocao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,8 +142,22 @@ public class home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu7.setText("Aprovar");
-        jMenuBar1.add(jMenu7);
+        jMenuaprovar.setText("Aprovar");
+        jMenuaprovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuaprovarActionPerformed(evt);
+            }
+        });
+
+        jMenuAprovarAdocao.setText("Aprovar");
+        jMenuAprovarAdocao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAprovarAdocaoActionPerformed(evt);
+            }
+        });
+        jMenuaprovar.add(jMenuAprovarAdocao);
+
+        jMenuBar1.add(jMenuaprovar);
 
         setJMenuBar(jMenuBar1);
 
@@ -186,6 +208,8 @@ public class home extends javax.swing.JFrame {
 
     private void jMenuListaAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaAnimaisActionPerformed
         // TODO add your handling code here:
+        ListarAnimal tela = new ListarAnimal();
+        tela.show();
     }//GEN-LAST:event_jMenuListaAnimaisActionPerformed
 
     private void jMenuListaAdotanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaAdotanteActionPerformed
@@ -217,6 +241,30 @@ public class home extends javax.swing.JFrame {
         ListarONG tela = new ListarONG();
         tela.show();
     }//GEN-LAST:event_jMenuListaOngActionPerformed
+
+    private void jMenuaprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuaprovarActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jMenuaprovarActionPerformed
+
+    private void jMenuAprovarAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAprovarAdocaoActionPerformed
+        // TODO add your handling code here:
+        if(UserCache.getLoggedInUserId() != null){
+            FuncionarioController funcionarioController = new FuncionarioController();
+            FuncionarioModelo funcionario = funcionarioController.getFuncionarioById(UserCache.getLoggedInUserId());
+
+            // Verificar se o tipo de usuário é administrador
+            if (funcionario.getTpUsuario().equals("A")) {
+                AprovaAdocao tela = new AprovaAdocao();
+                tela.show();
+            } else {
+                JOptionPane.showMessageDialog(this, "Você não possui perfil de Administrador para acessar essa tela.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+    }//GEN-LAST:event_jMenuAprovarAdocaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +307,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenuItem jMenuAprovarAdocao;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuCadAdotante;
     private javax.swing.JMenuItem jMenuCadAnimal;
@@ -269,5 +317,6 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuListaAnimais;
     private javax.swing.JMenuItem jMenuListaOng;
     private javax.swing.JMenuItem jMenuListaVoluntario;
+    private javax.swing.JMenu jMenuaprovar;
     // End of variables declaration//GEN-END:variables
 }

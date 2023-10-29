@@ -19,8 +19,8 @@ public class AnimalController {
         servico.delete(id);
     }
 
-    public List<AnimalModelo> getByEspecieOrName(String especie, String nome){
-        return servico.getByEspecieOrName(especie, nome);
+    public List<AnimalModelo> getByStatusOrName(String status, String nome){
+        return servico.getByStatusOrName(status, nome);
     }
 
 
