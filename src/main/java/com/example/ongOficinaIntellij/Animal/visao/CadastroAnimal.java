@@ -193,7 +193,7 @@ public class CadastroAnimal extends javax.swing.JFrame {
 
         jLabel3.setText("Status");
 
-        JcomboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "D - Disponível", "P - Pendente", "I - Indisponível" }));
+        JcomboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "D - Disponível", "I - Indisponível" }));
 
         jLabel11.setText("ONG");
 
@@ -386,26 +386,34 @@ public class CadastroAnimal extends javax.swing.JFrame {
 
         this.dispose();
         
-        home tela = new home();
-        tela.show();
+//        home tela = new home();
+//        tela.show();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
 
     private void RadioCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioCaoActionPerformed
         // TODO add your handling code here:
+        RadioCao.setSelected(true);
+        RadioGato.setSelected(false);
     }//GEN-LAST:event_RadioCaoActionPerformed
 
     private void RadioGatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioGatoActionPerformed
         // TODO add your handling code here:
+        RadioGato.setSelected(true);
+        RadioCao.setSelected(false);
     }//GEN-LAST:event_RadioGatoActionPerformed
 
     private void RadioSexoFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioSexoFActionPerformed
         // TODO add your handling code here:
+        RadioSexoF.setSelected(true);
+        RadioSexoM.setSelected(false);
     }//GEN-LAST:event_RadioSexoFActionPerformed
 
     private void RadioSexoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioSexoMActionPerformed
         // TODO add your handling code here:
+        RadioSexoM.setSelected(true);
+        RadioSexoF.setSelected(false);
     }//GEN-LAST:event_RadioSexoMActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

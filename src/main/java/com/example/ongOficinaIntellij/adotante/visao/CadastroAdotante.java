@@ -259,8 +259,8 @@ public class CadastroAdotante extends javax.swing.JFrame {
 
 
         this.dispose();
-        home tela = new home();
-        tela.show();
+//        home tela = new home();
+//        tela.show();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed

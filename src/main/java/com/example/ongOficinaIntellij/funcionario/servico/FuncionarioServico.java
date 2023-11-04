@@ -113,16 +113,31 @@ public class FuncionarioServico {
 
     public List<FuncionarioModelo> getByCPFOrName(String cpf, String nome ){
         UtilitariosBanco.initConection();
-        String sql = "SELECT * FROM Funcionario ";
-        if ( !cpf.isEmpty() || !nome.isEmpty()){
-            sql += " WHERE cpf = :cpf OR nome = :nome";
+        String sql = "SELECT * FROM funcionario ";
+
+        sql += " WHERE 1=1 ";
+
+        if ( !cpf.isEmpty()){
+            sql += " and (cpf like :cpf )";
         }
+
+        if (!nome.isEmpty()){
+            sql += "  and upper(nome) like (:nome)";
+        }
+
+
+//        if ( !cpf.isEmpty() || !nome.isEmpty()){
+//            sql += " WHERE cpf like :cpf OR upper(nome) like (:nome)";
+//        }
 
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Funcionario.class);
 
-        if ( !cpf.isEmpty() || !nome.isEmpty()) {
-            query.setParameter("cpf", cpf);
-            query.setParameter("nome", nome);
+        if ( !cpf.isEmpty() ) {
+            query.setParameter("cpf", "%" + cpf +"%");
+        }
+
+        if ( !nome.isEmpty()) {
+            query.setParameter("nome", "%" + nome.toUpperCase()+"%");
         }
 
         List<Funcionario> resultList = query.getResultList();

@@ -295,8 +295,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
 
         this.dispose();
-        home tela = new home();
-        tela.show();
+//        home tela = new home();
+//        tela.show();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed
@@ -385,6 +385,8 @@ public class CadastroVoluntario extends javax.swing.JFrame {
 
     private void RadioAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioAdministradorActionPerformed
         // TODO add your handling code here:
+        RadioAdministrador.setSelected(true);
+        RadioVoluntario.setSelected(false);
     }//GEN-LAST:event_RadioAdministradorActionPerformed
 
     private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed

@@ -124,17 +124,31 @@ public class AnimalServico {
 
     public List<AnimalModelo> getByStatusOrName(String status, String nome ){
         UtilitariosBanco.initConection();
-        String sql = "SELECT * FROM animal";
-        if ( !status.isEmpty() || !nome.isEmpty()){
-            sql += " WHERE status = :status OR nome = :nome";
+
+        String sql = "SELECT * FROM animal ";
+
+        sql += " WHERE 1=1 ";
+
+        if ( !status.isEmpty()){
+            sql += " and (status = :status )";
         }
+
+        if (!nome.isEmpty()){
+            sql += "  and upper(nome) like (:nome)";
+        }
+
+
+
 
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Animal.class);
 
-        if ( !status.isEmpty() || !nome.isEmpty()) {
-            query.setParameter("status", "D");
-            query.setParameter("nome", nome);
+        if ( !status.isEmpty()) {
+            query.setParameter("status", status);
         }
+        if ( !nome.isEmpty()) {
+            query.setParameter("nome", "%" + nome.toUpperCase()+"%");
+        }
+
 
         List<Animal> resultList = query.getResultList();
 

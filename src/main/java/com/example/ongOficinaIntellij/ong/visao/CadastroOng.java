@@ -189,12 +189,10 @@ public class CadastroOng extends javax.swing.JFrame {
     }//GEN-LAST:event_txttelefoneActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
-        //        LoginServico loginServico = new LoginServico();
-        //        loginServico.login(txtemail.getText(), txtsenha.getText());
 
         this.dispose();
-        home tela = new home();
-        tela.show();
+//        home tela = new home();
+//        tela.show();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarActionPerformed

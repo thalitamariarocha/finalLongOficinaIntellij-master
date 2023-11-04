@@ -100,14 +100,29 @@ public class OngServico {
     public List<OngModelo> getByCNPJOrName(String cnpj, String nome ){
         UtilitariosBanco.initConection();
         String sql = "SELECT * FROM ong ";
+
+        sql += " WHERE 1=1 ";
+
+        if ( !cnpj.isEmpty()){
+            sql += " and (cnpj like :cnpj)";
+        }
+
+        if (!nome.isEmpty()){
+            sql += "  and upper(nome) like (:nome)";
+        }
+
+
         if ( !cnpj.isEmpty() || !nome.isEmpty()){
-            sql += " WHERE upper(cnpj) like (:cnpj) OR upper(nome) like (:nome)";
+            sql += " WHERE cpf like :cnpj OR upper(nome) like (:nome)";
         }
 
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Ong.class);
 
-        if ( !cnpj.isEmpty() || !nome.isEmpty()) {
-            query.setParameter("cnpj", cnpj);
+        if ( !cnpj.isEmpty() ) {
+            query.setParameter("cnpj", "%" + cnpj +"%");
+        }
+
+        if (  !nome.isEmpty()) {
             query.setParameter("nome", "%" + nome.toUpperCase()+"%");
         }
 

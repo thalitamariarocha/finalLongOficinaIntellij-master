@@ -111,14 +111,25 @@ public class AdotanteServico {
     public List<AdotanteModelo> getByCPFOrName(String cpf, String nome ){
         UtilitariosBanco.initConection();
         String sql = "SELECT * FROM cliente ";
-        if ( !cpf.isEmpty() || !nome.isEmpty()){
-            sql += " WHERE upper(cpf) like (:cpf) OR upper(nome) like (:nome)";
+
+            sql += " WHERE 1=1 ";
+
+        if ( !cpf.isEmpty()){
+            sql += " and (cpf like :cpf )";
         }
+
+        if (!nome.isEmpty()){
+            sql += "  and upper(nome) like (:nome)";
+        }
+
 
         Query query = UtilitariosBanco.createNativeQueryWithClas(sql, Adotante.class);
 
-        if ( !cpf.isEmpty() || !nome.isEmpty()) {
-            query.setParameter("cpf", cpf);
+        if ( !cpf.isEmpty() ) {
+            query.setParameter("cpf", "%" + cpf +"%");
+        }
+
+        if (  !nome.isEmpty()) {
             query.setParameter("nome", "%" + nome.toUpperCase()+"%");
         }
 

@@ -8,6 +8,7 @@ import com.example.ongOficinaIntellij.Animal.visao.CadastroAnimal;
 import com.example.ongOficinaIntellij.Animal.visao.ListarAnimal;
 import com.example.ongOficinaIntellij.Utils.UserCache;
 import com.example.ongOficinaIntellij.adocao.visao.AprovaAdocao;
+import com.example.ongOficinaIntellij.adocao.visao.ConsultaAdocao;
 import com.example.ongOficinaIntellij.adotante.visao.CadastroAdotante;
 import com.example.ongOficinaIntellij.adotante.visao.ListarAdotante;
 import com.example.ongOficinaIntellij.funcionario.controller.FuncionarioController;
@@ -54,6 +55,7 @@ public class home extends javax.swing.JFrame {
         jMenuListaAdotante = new javax.swing.JMenuItem();
         jMenuListaVoluntario = new javax.swing.JMenuItem();
         jMenuListaOng = new javax.swing.JMenuItem();
+        jMenuStatusAdocao = new javax.swing.JMenuItem();
         jMenuaprovar = new javax.swing.JMenu();
         jMenuAprovarAdocao = new javax.swing.JMenuItem();
 
@@ -140,6 +142,14 @@ public class home extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuListaOng);
 
+        jMenuStatusAdocao.setText("Status das Adoções");
+        jMenuStatusAdocao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuStatusAdocaoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuStatusAdocao);
+
         jMenuBar1.add(jMenu2);
 
         jMenuaprovar.setText("Aprovar");
@@ -149,7 +159,7 @@ public class home extends javax.swing.JFrame {
             }
         });
 
-        jMenuAprovarAdocao.setText("Aprovar");
+        jMenuAprovarAdocao.setText("Aprovar Adoção");
         jMenuAprovarAdocao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuAprovarAdocaoActionPerformed(evt);
@@ -234,12 +244,13 @@ public class home extends javax.swing.JFrame {
     private void jMenuCadOngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadOngActionPerformed
         CadastroOng tela = new CadastroOng(null);
         tela.show();
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jMenuCadOngActionPerformed
 
     private void jMenuListaOngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListaOngActionPerformed
         ListarONG tela = new ListarONG();
         tela.show();
+        this.dispose();
     }//GEN-LAST:event_jMenuListaOngActionPerformed
 
     private void jMenuaprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuaprovarActionPerformed
@@ -265,6 +276,13 @@ public class home extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jMenuAprovarAdocaoActionPerformed
+
+    private void jMenuStatusAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuStatusAdocaoActionPerformed
+            // TODO add your handling code here:
+            ConsultaAdocao tela = new ConsultaAdocao();
+            tela.show();
+            
+    }//GEN-LAST:event_jMenuStatusAdocaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,6 +335,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuListaAnimais;
     private javax.swing.JMenuItem jMenuListaOng;
     private javax.swing.JMenuItem jMenuListaVoluntario;
+    private javax.swing.JMenuItem jMenuStatusAdocao;
     private javax.swing.JMenu jMenuaprovar;
     // End of variables declaration//GEN-END:variables
 }

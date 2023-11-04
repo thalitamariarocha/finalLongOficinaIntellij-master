@@ -28,6 +28,12 @@ public class UtilitariosBanco {
         return em.createNativeQuery(sql, classe);
     }
 
+    public static Query createNativeQueryWithClas2(String sql){
+        // criar uma quary que devolve um objeto sem precisar de uma classe
+
+        return em.createNativeQuery(sql);
+    }
+
     public static void commit(){
         em.getTransaction().commit();
     }
