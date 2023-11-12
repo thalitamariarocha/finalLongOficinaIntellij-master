@@ -110,7 +110,7 @@ public class home extends javax.swing.JFrame {
 
         jMenu2.setText("Consultar");
 
-        jMenuListaAnimais.setText("Animais Disponíveis");
+        jMenuListaAnimais.setText("Relatório de Animais");
         jMenuListaAnimais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuListaAnimaisActionPerformed(evt);

@@ -53,7 +53,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuListaAnimais">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Animais Dispon&#xed;veis"/>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Animais"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuListaAnimaisActionPerformed"/>

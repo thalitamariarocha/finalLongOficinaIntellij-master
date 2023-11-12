@@ -237,6 +237,10 @@ public class ListarVoluntario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if(txtPesqNome.getText().isEmpty() && txtPesqNome1.getText().isEmpty()){
+           preencherTabela();
+            return;
+        }
         FuncionarioController funcionarioController = new FuncionarioController();
         this.atualizaTabela(funcionarioController.getByCPFOrName(txtPesqNome1.getText(), txtPesqNome.getText()));
     }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -292,7 +296,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                     funcionario.getEndereco(),
                     funcionario.getEmail(),
                     funcionario.getLogin(),
-                    funcionario.getTpUsuario()
+                    (funcionario.getTpUsuario().equals("V")) ? "Voluntário" : "Administrador",
             };
             model.addRow(rowData);
         }
@@ -315,7 +319,7 @@ public class ListarVoluntario extends javax.swing.JFrame {
                     funcionario.getEndereco(),
                     funcionario.getEmail(),
                     funcionario.getLogin(),
-                    funcionario.getTpUsuario()
+                    (funcionario.getTpUsuario().equals("V")) ? "Voluntário" : "Administrador",
             };
             model.addRow(rowData);
         }

@@ -178,6 +178,10 @@ public class ListarAdotante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if(txtPesqCpf.getText().equals("") && txtPesqNome.getText().equals("")){
+            preencherTabela();
+            return;
+        }
         AdotanteController adotanteController = new AdotanteController();
            this.atualizaTabela(adotanteController.getByCPFOrName(txtPesqCpf.getText(), txtPesqNome.getText()));
     }//GEN-LAST:event_btnPesquisarActionPerformed
@@ -291,7 +295,7 @@ public class ListarAdotante extends javax.swing.JFrame {
                     adotante.getEndereco(),
                     adotante.getEmail(),
                     adotante.getRenda(),
-                    adotante.getTpMoradia()
+                    (adotante.getTpMoradia().equals("C")) ? "Casa" : "Apartamento",
             };
             model.addRow(rowData);
         }
@@ -314,7 +318,7 @@ public class ListarAdotante extends javax.swing.JFrame {
                     adotante.getEndereco(),
                     adotante.getEmail(),
                     adotante.getRenda(),
-                    adotante.getTpMoradia()
+                    (adotante.getTpMoradia().equals("C")) ? "Casa" : "Apartamento",
             };
             model.addRow(rowData);
         }

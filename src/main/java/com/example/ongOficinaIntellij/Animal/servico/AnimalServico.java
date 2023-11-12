@@ -7,7 +7,12 @@ import com.example.ongOficinaIntellij.funcionario.entidade.Funcionario;
 import com.example.ongOficinaIntellij.funcionario.entidade.FuncionarioModelo;
 
 import javax.persistence.Query;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AnimalServico {
@@ -123,6 +128,11 @@ public class AnimalServico {
 
 
     public List<AnimalModelo> getByStatusOrName(String status, String nome ){
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+
         UtilitariosBanco.initConection();
 
         String sql = "SELECT * FROM animal ";
@@ -157,15 +167,16 @@ public class AnimalServico {
         resultList.forEach( (animalModelo -> {
             AnimalModelo animal = new AnimalModelo();
             animal.setId(animalModelo.getId());
+            //animal.setDt_nascimento(dtNascimentoFormatada);
             animal.setDt_nascimento(animalModelo.getDt_nascimento());
             animal.setNome(animalModelo.getNome());
             animal.setSexo(animalModelo.getSexo());
-            animal.setEspecie(animalModelo.getEspecie());
+            animal.setEspecie((animalModelo.getEspecie().equals("C")) ? "Cachorro" : "Gato");
             animal.setCastrado(animalModelo.getCastrado());
             animal.setPorte(animalModelo.getPorte());
             animal.setVacina(animalModelo.getVacina());
             animal.setObservacao(animalModelo.getObservacao());
-            animal.setStatus(animalModelo.getStatus());
+            animal.setStatus((animalModelo.getStatus().equals("D")) ? "Disponível" : "Indisponível");
             animal.setIdOng(animalModelo.getIdOng());
             animal.setIdFuncionario(animalModelo.getIdFuncionario());
 
